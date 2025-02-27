@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaBath, FaBookmark, FaRocketchat, FaSearch } from "react-icons/fa";
-import { FaBed, FaMapLocationDot } from "react-icons/fa6";
+import { FaBed } from "react-icons/fa6";
+import { FiMapPin } from "react-icons/fi";
 
 export default async function Results({params}:any) {
     const { country } = await params;
@@ -9,7 +10,7 @@ export default async function Results({params}:any) {
     return (
         <>
             <div className="container flex flex-col lg:flex-row justify-center gap-8 items-center">
-                <div className="max-w-xl w-full flex flex-col gap-8">
+                <div className="max-w-xl mt-10 w-full flex flex-col gap-8">
                     <div className="flex flex-col gap-2">
                         <h2 className="text-2xl font-normal">Search results for <span className="font-bold">{country}</span></h2>
                         <div className="grid grid-cols-6 gap-3 items-center">
@@ -46,11 +47,11 @@ export default async function Results({params}:any) {
                     </div>
                     <div className="h-full lg:h-[300px] 2xl:h-[700px] scrollDontShow overflow-y-scroll">
                         <Link href="/apartament/1" className="flex flex-col lg:flex-row gap-3 mb-5">
-                            <Image className="object-cover lg:max-w-60 w-full h-60 rounded-lg" src="/images/apartament.webp" width={400} height={400} alt="foto do apartamento" />
-                            <div className="flex flex-col gap-4 lg:justify-between">
+                            <Image className="object-cover lg:max-w-60 w-full rounded-lg" src="/images/apartament.webp" width={400} height={400} alt="foto do apartamento" />
+                            <div className="flex flex-col gap-4">
                                 <h5 className="font-semibold text-xl">A great apartament next to the park!</h5>
                                 <div className="flex items-center gap-1">
-                                    <FaMapLocationDot />
+                                    <FiMapPin className="text-gray-500" />
                                     <span className="text-gray-500">456 Park Avenue, London</span>
                                 </div>
                                 <h6 className="text-xl bg-yellow-200 w-fit p-1">$1000</h6>
@@ -76,12 +77,12 @@ export default async function Results({params}:any) {
                                 </div>
                             </div>
                         </Link>
-                        <Link href="/" className="flex flex-col lg:flex-row gap-3 mb-5">
-                            <Image className="object-cover lg:max-w-60 w-full h-60 rounded-lg" src="/images/apartament.webp" width={400} height={400} alt="foto do apartamento" />
-                            <div className="flex flex-col gap-4 lg:justify-between">
+                        <Link href="/apartament/1" className="flex flex-col lg:flex-row gap-3 mb-5">
+                            <Image className="object-cover lg:max-w-60 w-full rounded-lg" src="/images/apartament.webp" width={400} height={400} alt="foto do apartamento" />
+                            <div className="flex flex-col gap-4">
                                 <h5 className="font-semibold text-xl">A great apartament next to the park!</h5>
                                 <div className="flex items-center gap-1">
-                                    <FaMapLocationDot />
+                                    <FiMapPin className="text-gray-500" />
                                     <span className="text-gray-500">456 Park Avenue, London</span>
                                 </div>
                                 <h6 className="text-xl bg-yellow-200 w-fit p-1">$1000</h6>
@@ -107,12 +108,12 @@ export default async function Results({params}:any) {
                                 </div>
                             </div>
                         </Link>
-                        <Link href="/" className="flex flex-col lg:flex-row gap-3 mb-5">
-                            <Image className="object-cover lg:max-w-60 w-full h-60 rounded-lg" src="/images/apartament.webp" width={400} height={400} alt="foto do apartamento" />
-                            <div className="flex flex-col gap-4 lg:justify-between">
+                        <Link href="/apartament/1" className="flex flex-col lg:flex-row gap-3 mb-5">
+                            <Image className="object-cover lg:max-w-60 w-full rounded-lg" src="/images/apartament.webp" width={400} height={400} alt="foto do apartamento" />
+                            <div className="flex flex-col gap-4">
                                 <h5 className="font-semibold text-xl">A great apartament next to the park!</h5>
                                 <div className="flex items-center gap-1">
-                                    <FaMapLocationDot />
+                                    <FiMapPin className="text-gray-500" />
                                     <span className="text-gray-500">456 Park Avenue, London</span>
                                 </div>
                                 <h6 className="text-xl bg-yellow-200 w-fit p-1">$1000</h6>

@@ -8,8 +8,8 @@ export default function Apartament() {
     return (
         <>
              <div className="container flex justify-center gap-8">
-                <div className="max-w-xl mt-20 w-full h-full flex flex-col gap-8">
-                    <div className="flex gap-3">
+                <div className="max-w-xl mt-24 w-full h-full flex flex-col gap-8">
+                    <div className="flex justify-between w-full">
                         <Image className="max-w-96 h-[22rem] object-cover rounded-lg" src="/images/apartament.webp" width={400} height={400} alt="imagem do apartamento" />
                         <div className="flex flex-col justify-between">
                             <Image className="max-w-40 object-cover rounded-lg" src="/images/apartament.webp" width={400} height={400} alt="imagem do apartamento" />
@@ -34,8 +34,8 @@ export default function Apartament() {
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, aut. Animi mollitia autem doloremque unde magnam error nostrum culpa impedit deserunt, quo rerum. Sunt provident adipisci incidunt unde est in?</p>
                     <p className="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, aut. Animi mollitia autem doloremque unde magnam error nostrum culpa impedit deserunt, quo rerum. Sunt provident adipisci incidunt unde est in?</p>
                 </div>
-                <div className="min-h-screen max-w-md w-full bg-[#FCF6F3] flex flex-col justify-center">
-                    <div className="px-4 flex flex-col h-full justify-between mb-5 mt-[70px]">
+                <div className="min-h-screen max-w-md bg-[#FCF6F3] flex flex-col justify-center">
+                    <div className="px-4 flex flex-col h-full justify-between mb-5 mt-[85px]">
                         <h5 className="font-bold mb-3">General</h5>
                         <div className="bg-white w-full px-2 py-3 rounded-lg flex flex-col gap-2">
                             <div className="flex items-center gap-2">
