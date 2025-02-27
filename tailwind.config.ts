@@ -12,6 +12,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      strokeWidth: {
+        '2': '20px',
+      }
     },
   },
   plugins: [],

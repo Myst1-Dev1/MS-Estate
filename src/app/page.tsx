@@ -1,101 +1,44 @@
 import Image from "next/image";
+import { FaSearch } from "react-icons/fa";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="container flex justify-center gap-8 items-center">
+      <div className="max-w-xl w-full flex flex-col gap-8">
+        <h1 className="font-bold text-[50px]">Find Real Estate & Get <br /> Your Dream Place</h1>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem nostrum animi dolor, explicabo amet velit a quaerat ad culpa molestiae unde natus voluptatem! Explicabo atque nobis totam iure tenetur id!</p>
+        <div>
+          <div className="flex">
+            <span className="bg-black max-w-24 text-center w-full block p-3 text-white cursor-pointer transition-all duration-500 hover:bg-yellow-500">Buy</span>
+            <span className="border border-gray-300 max-w-24 text-center w-full block p-3 cursor-pointer transition-all duration-500 hover:bg-yellow-500">Rent</span>
+          </div>
+          <div className="flex justify-between w-full border border-gray-300">
+            <input type="text" className="bg-none focus:outline-none focus:border-r-2 focus:border-gray-300 p-3 w-full" placeholder="City Location" />
+            <input type="text" className="bg-none focus:outline-none focus:border-r-2 focus:border-gray-300 p-3 w-full" placeholder="Min Price" />
+            <input type="text" className="bg-none outline-none p-3 w-full" placeholder="Max Price" />
+            <div className="cursor-pointer w-14 h-14 bg-yellow-500 text-white text-xl px-5 grid place-items-center transition-all duration-500 hover:bg-yellow-700">
+              <FaSearch />
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className="flex justify-between items-center">
+          <div>
+            <h2 className="font-bold text-2xl">16+</h2>
+            <span>Years of Experience</span>
+          </div>
+          <div>
+            <h2 className="font-bold text-2xl">200</h2>
+            <span>Awards Gained</span>
+          </div>
+          <div>
+            <h2 className="font-bold text-2xl">1200+</h2>
+            <span>Propertys Ready</span>
+          </div>
+        </div>
+      </div>
+      <div className="min-h-screen max-w-md w-full bg-[#FCF6F3] grid place-items-center">
+        <Image className="w-full min-w-xl object-cover" src="/images/bg.webp" width={400} height={400} alt="foto de predios" />
+      </div>
     </div>
   );
 }
