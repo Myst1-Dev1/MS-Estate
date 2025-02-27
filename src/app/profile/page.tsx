@@ -165,7 +165,7 @@ export default function Profile() {
                         </Link>
                     </div>
                 </div>
-                <div className="min-h-screen max-w-md w-full bg-[#FCF6F3] flex flex-col justify-center">
+                <div className="min-h-screen lg:max-w-md w-full bg-[#FCF6F3] flex flex-col justify-center">
                     <div className="px-4 mt-10">
                         <h2 className="font-thin text-xl mb-6">Messages</h2>
                         <div className="h-full lg:h-[460px] 2xl:h-[900px] scrollDontShow overflow-y-scroll">

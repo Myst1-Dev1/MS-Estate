@@ -11,7 +11,7 @@ export function ChatBox({ isOpenChatBox, onSetOpenChat }:ChatBoxProps) {
     return (
         <>
             {isOpenChatBox && 
-                <div className="absolute bottom-0 right-40 max-w-96 w-full bg-white z-50">
+                <div className="fixed bottom-0 right-0 lg:right-40 max-w-96 w-full bg-white z-50">
                     <div className="flex justify-between items-center bg-[#FBDFA1] p-3 w-full">
                         <div className="flex gap-3 items-center">
                             <Image className="w-8 h-8 object-cover rounded-full" src="/images/user1.webp" width={200} height={200} alt="foto do usuário" />
