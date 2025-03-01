@@ -3,13 +3,15 @@
 import gsap from "gsap";
 import Image from "next/image";
 import Link from "next/link";
+import { parseCookies } from "nookies";
 import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
 
 export function Header() {
     const [isMobileNavBarOpen, setIsMobileNavBarOpen] = useState(false);
-    const [isUserLogged, setIsUserLogged] = useState(true);
+
+    const {'user-token': cookie} = parseCookies();
 
     function handleOpenMobileNavBar() {
         setIsMobileNavBarOpen(true);
@@ -34,7 +36,7 @@ export function Header() {
                         <Link className="font-normal transition-all duration-500 hover:text-yellow-500" href="/">Agents</Link>
                     </nav>
                 </div>
-                {isUserLogged ? 
+                {cookie ? 
                     <div className="flex gap-8 items-center">
                         <Image className="w-10 h-10 object-cover rounded-full" src="/images/user1.webp" width={200} height={200} alt="foto do usuário" />
                         <Link href="/profile" className="button">Profile</Link>
@@ -42,7 +44,7 @@ export function Header() {
                     :
                     <div className="hidden lg:flex gap-10 items-center px-4">
                         <Link href="/signIn">Sign In</Link>
-                        <button className="button">Sign Up</button>
+                        <Link href="/signUp" className="button">Sign Up</Link>
                     </div>
                 }
                 <FaBars onClick={handleOpenMobileNavBar} className="block lg:hidden" />

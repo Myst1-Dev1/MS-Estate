@@ -1,8 +1,12 @@
 'use client';
 
 import { ChatBox } from "@/components/chatBox";
+import { api } from "@/services/axios";
+import { useAuth } from "@/services/context/AuthContext";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { destroyCookie } from "nookies";
 import { useState } from "react";
 import { FaBath, FaBookmark, FaRocketchat } from "react-icons/fa";
 import { FaBed } from "react-icons/fa6";
@@ -11,27 +15,40 @@ import { FiMapPin } from "react-icons/fi";
 export default function Profile() {
     const [openChat, setOpenChat] = useState(false);
 
+    const { currentUser } = useAuth();
+
+    const router = useRouter();
+
+    async function handleLogout() {
+        const res = await api.post('auth/logout');
+        destroyCookie(null,'user-token');
+
+        router.push('/');
+        console.log('Logout success', res.data);
+    }
+
     return (
         <>
             <div className="container flex flex-col lg:flex-row justify-center gap-8 items-center">
-                <div className="max-w-xl mt-16 w-full flex flex-col gap-8">
+                <div className="max-w-xl mt-20 w-full flex flex-col gap-8">
                     <div className="flex flex-col gap-2">
                         <div className="flex justify-between items-center">
                             <h2 className="text-2xl font-thin mb-5">User Information</h2>
-                            <button className="bg-yellow-400 p-2 w-fit font-medium transition-all duration-500 hover:bg-yellow-600">Update Profile</button>
+                            <Link href="/profileUpdate" className="bg-yellow-400 p-2 w-fit font-medium transition-all duration-500 hover:bg-yellow-600">Update Profile</Link>
                         </div> 
                         <div className="flex items-center gap-4">
                             <h3>Avatar:</h3>
-                            <Image className="h-10 w-10 rounded-full object-cover" src="/images/user1.webp" width={200} height={200} alt="foto do usuário" />
+                            <Image className="h-10 w-10 rounded-full object-cover" src={currentUser?.avatar || "/images/user1.webp"} width={200} height={200} alt="foto do usuário" />
                         </div>
                         <div className="flex items-center gap-4">
                             <h3>Username:</h3>
-                            <h3 className="font-bold">John Doe</h3>
+                            <h3 className="font-bold">{currentUser?.username}</h3>
                         </div>
                         <div className="flex items-center gap-4">
                             <h3>Email:</h3>
-                            <h3 className="font-bold">Johndoe@gmail.com</h3>
+                            <h3 className="font-bold">{currentUser?.email}</h3>
                         </div>
+                        <button onClick={handleLogout} className="button max-w-20">Logout</button>
                     </div>
                     <div className="h-full lg:h-[300px] 2xl:h-[700px] scrollDontShow overflow-y-scroll">
                         <div className="flex justify-between items-center mb-5">
