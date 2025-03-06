@@ -1,10 +1,11 @@
 'use client';
 
-import { parseCookies } from "nookies";
-import { createContext, useContext, useState } from "react";
+import { parseCookies, setCookie } from "nookies";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface AuthContextProps {
     currentUser:string | any;
+    updateUser: (data:any) => void;
 }
 
 export const AuthContext = createContext({} as AuthContextProps);
@@ -21,8 +22,18 @@ export const AuthContextProvider = ({children}:any) => {
         }
     });
 
+    const updateUser = (data:any) => {
+        setCurrentUser(data);
+      };
+    
+      useEffect(() => {
+        setCookie(undefined, 'user-token', JSON.stringify(currentUser), {
+            maxAge: 60 * 60 * 2
+        })
+      }, [currentUser]);
+
     return (
-        <AuthContext.Provider value={{currentUser}}>
+        <AuthContext.Provider value={{currentUser, updateUser}}>
             {children}
         </AuthContext.Provider>
     )

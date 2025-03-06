@@ -1,6 +1,7 @@
 'use client';
 
 import { api } from "@/services/axios";
+import { useAuth } from "@/services/context/AuthContext";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -9,6 +10,7 @@ import { useState } from "react";
 
 export default function SignIn() {
     const [loading, setLoading] = useState(false);
+    const { updateUser } = useAuth();
 
     const router = useRouter();
    
@@ -29,7 +31,9 @@ export default function SignIn() {
             if(res.status === 200 || res.status === 201) {
                 setCookie(undefined, 'user-token', JSON.stringify(res.data), {
                     maxAge: 60 * 60 * 2
-                })
+                });
+
+                updateUser(res.data);
 
                 console.log('success logged in');
                 router.push('/');

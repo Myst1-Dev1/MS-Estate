@@ -53,7 +53,7 @@ export default function Profile() {
                     <div className="h-full lg:h-[300px] 2xl:h-[700px] scrollDontShow overflow-y-scroll">
                         <div className="flex justify-between items-center mb-5">
                             <h3 className="text-2xl font-thin">My List</h3>
-                            <button className="bg-yellow-400 p-2 w-fit font-medium transition-all duration-500 hover:bg-yellow-600">Add New Post</button>
+                            <Link href="/addNewPost" className="bg-yellow-400 p-2 w-fit font-medium transition-all duration-500 hover:bg-yellow-600">Add New Post</Link>
                         </div> 
                         <Link href="/apartament/1" className="flex flex-col lg:flex-row gap-3 mb-5">
                             <Image className="object-cover lg:max-w-60 w-full rounded-lg" src="/images/apartament.webp" width={400} height={400} alt="foto do apartamento" />

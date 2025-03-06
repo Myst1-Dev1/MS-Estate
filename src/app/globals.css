@@ -15,3 +15,7 @@
 .scrollDontShow::-webkit-scrollbar {
   display: none;
 }
+
+input[type="number"]::-webkit-inner-spin-button {
+  display: none;
+}
