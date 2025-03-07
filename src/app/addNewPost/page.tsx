@@ -3,6 +3,7 @@
 import UploadWidget from "@/components/uploadWidget";
 import { api } from "@/services/axios";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
@@ -10,6 +11,8 @@ import "suneditor/dist/css/suneditor.min.css";
 export default function AddNewPage() {
     const [images, setImages] = useState<[] | any>([]);
     const [loading, setLoading] = useState(false);
+
+    const router = useRouter();
 
     async function handleCreateNewPost(e:React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -46,6 +49,7 @@ export default function AddNewPage() {
                   },
              });
 
+             router.push('/apartament/' + res.data.id);
              console.log('Success', res.data);
         } catch (error) {
             console.log('Error when create new post', error);
@@ -121,14 +125,14 @@ export default function AddNewPage() {
                             </div>
                             <div className="flex flex-col gap-3">
                                 <label className="font-bold" htmlFor="policy">Utilities policy</label>
-                                <select id="policy" name="policy" className="w-full p-2 border border-gray-400 outline-none">
+                                <select id="policy" name="utilities" className="w-full p-2 border border-gray-400 outline-none">
                                     <option value="Owner is responsibler">Owner is responsible</option>
                                     <option value="buy">Buy</option>
                                 </select>
                             </div>
                             <div className="flex flex-col gap-3">
                                 <label className="font-bold" htmlFor="pet">Pet policy</label>
-                                <select id="pet" name="pet_policy" className="w-full p-2 border border-gray-400 outline-none">
+                                <select id="pet" name="pet" className="w-full p-2 border border-gray-400 outline-none">
                                     <option value="Allowed">Allowed</option>
                                     <option value="buy">Buy</option>
                                 </select>
@@ -151,11 +155,11 @@ export default function AddNewPage() {
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                             <div className="flex flex-col gap-3">
                                 <label className="font-bold" htmlFor="bus">Bus</label>
-                                <input type="number" id="bus" className="w-full p-2 border border-gray-400 outline-none" />
+                                <input type="number" id="bus" name="bus" className="w-full p-2 border border-gray-400 outline-none" />
                             </div>
                             <div className="flex flex-col gap-3">
                                 <label className="font-bold" htmlFor="restaurant">Restaurant</label>
-                                <input type="number" id="restaurante" className="w-full p-2 border border-gray-400 outline-none" />
+                                <input type="number" id="restaurant" name="restaurant" className="w-full p-2 border border-gray-400 outline-none" />
                             </div>
                             <button className="button rounded-lg bg-emerald-600 h-16 mt-auto text-white hover:bg-emerald-900">
                                 {loading ?
@@ -173,7 +177,7 @@ export default function AddNewPage() {
                     </form>
                 </div>
                 <div className="min-h-screen max-w-md w-full bg-[#FCF6F3] flex flex-col justify-center items-center gap-4">
-                    <div className="flex gap-4">
+                    <div className="flex flex-wrap gap-4">
                         {images?.map((img: any, index: number) => (
                             <Image key={index} className="w-full h-24 object-cover" src={img} width={400} height={400} alt="foto de predios" />
                         ))}
