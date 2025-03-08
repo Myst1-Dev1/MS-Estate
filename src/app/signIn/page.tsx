@@ -35,7 +35,7 @@ export default function SignIn() {
 
                 updateUser(res.data);
 
-                console.log('success logged in');
+                console.log('success logged in', res.data);
                 router.push('/');
             }
             } catch (error) {

@@ -14,3 +14,8 @@ export type Post = {
     type: string;
     userId: string;
   }
+
+export type ProfilePostsResponseType = {
+  userPosts: Post[];
+  savedPosts: Post[];
+}

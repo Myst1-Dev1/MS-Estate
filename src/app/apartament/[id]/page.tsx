@@ -2,10 +2,11 @@
 
 import { ApartamentImages } from "@/components/apartamentImages";
 import { Map } from "@/components/map";
+import { SavePost } from "@/components/savePost";
 import { fetchSinglePost } from "@/services/fetchSinglePost";
 import Image from "next/image";
 import { CiForkAndKnife } from "react-icons/ci";
-import { FaBookmark, FaHandshake, FaPaw, FaRocketchat, FaSchool, FaTools } from "react-icons/fa";
+import { FaHandshake, FaPaw, FaRocketchat, FaSchool, FaTools } from "react-icons/fa";
 import { FaBath, FaBed, FaBus, FaExpand } from "react-icons/fa6";
 import { FiMapPin } from "react-icons/fi";
 
@@ -13,6 +14,8 @@ export default async function Apartament({params}:any) {
     const { id } = await params;
 
     const data = await fetchSinglePost(id);
+
+    console.log(data);
 
     return (
         <>
@@ -116,10 +119,7 @@ export default async function Apartament({params}:any) {
                                 <FaRocketchat className="stroke-2 fill-none stroke-black" />
                                 <h6>Send a message</h6>
                             </div>
-                            <div className="bg-white rounded-md w-fit p-3 flex items-center gap-2 cursor-pointer transition-all duration-500 hover:bg-yellow-500 hover:text-white">
-                                <FaBookmark className="stroke-2 fill-none stroke-black" />
-                                <h6>Save the place</h6>
-                            </div>
+                            <SavePost id={id} />
                         </div>
                     </div>
                 </div>
