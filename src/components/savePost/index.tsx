@@ -6,9 +6,10 @@ import { FaBookmark } from "react-icons/fa";
 
 interface SavePostProps {
     id:string;
+    saved:boolean;
 }
 
-export function SavePost({id}: SavePostProps) {
+export function SavePost({id, saved}: SavePostProps) {
     const { currentUser } = useAuth();
     
     async function handleSavePost() {
@@ -24,7 +25,7 @@ export function SavePost({id}: SavePostProps) {
     
     return (
         <>
-            <div onClick={handleSavePost} className="bg-white rounded-md w-fit p-3 flex items-center gap-2 cursor-pointer transition-all duration-500 hover:bg-yellow-500 hover:text-white">
+            <div onClick={handleSavePost} className={`${saved ? 'bg-yellow-500' : 'bg-white'} rounded-md w-fit p-3 flex items-center gap-2 cursor-pointer transition-all duration-500 hover:bg-yellow-500 hover:text-white`}>
                 <FaBookmark className="stroke-2 fill-none stroke-black" />
                 <h6>Save the place</h6>
             </div>

@@ -1,6 +1,7 @@
 'use server';
 
 import { ProfilePageContent } from "@/components/profilePageContent";
+import { fetchChats } from "@/services/fetchChats";
 import { fetchProfilePosts } from "@/services/fetchProfilePosts";
 import { cookies } from "next/headers";
 
@@ -10,11 +11,14 @@ export default async function Profile() {
    
     const profileData = await fetchProfilePosts(token?.value);
 
-    console.log(profileData);
+    const chats = await fetchChats(token?.value);
+
+    console.log(chats);
+    
 
     return (
         <>
-            <ProfilePageContent data = {profileData} />
+            <ProfilePageContent data = {profileData} chats = {chats} />
         </>
     )
 }

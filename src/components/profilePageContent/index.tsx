@@ -3,7 +3,8 @@
 import { ChatBox } from "@/components/chatBox";
 import { api } from "@/services/axios";
 import { useAuth } from "@/services/context/AuthContext";
-import { ProfilePostsResponseType } from "@/types/post";
+import { useSocket } from "@/services/context/SocketContext";
+import { Chat, ProfilePostsResponseType } from "@/types/post";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -15,16 +16,16 @@ import { FiMapPin } from "react-icons/fi";
 
 interface ProfilePageContentProps {
     data:ProfilePostsResponseType;
+    chats: Chat[];
 }
 
-export function ProfilePageContent({data}:ProfilePageContentProps) {
-    const [openChat, setOpenChat] = useState(false);
+export function ProfilePageContent({data, chats}:ProfilePageContentProps) {
+    const [chat, setChat] = useState<Chat[] | null>(null);
 
     const { currentUser } = useAuth();
+    const { socket } = useSocket();
 
     const router = useRouter();
-
-    console.log(data);
 
     async function handleLogout() {
         const res = await api.post('auth/logout');
@@ -32,6 +33,17 @@ export function ProfilePageContent({data}:ProfilePageContentProps) {
 
         router.push('/');
         console.log('Logout success', res.data);
+    }
+
+    async function handleOpenChat(id:string, receiver:any) {
+        try {
+            const res = await api.get('chats/' + id);
+
+            setChat({...res.data, receiver});
+            console.log('Success', res.data);
+        } catch (error) {
+            console.log('Error to open chat', error);
+        }
     }
 
     return (
@@ -96,7 +108,7 @@ export function ProfilePageContent({data}:ProfilePageContentProps) {
                             </Link>
                         ))}
                         
-                        <h3 className="text-2xl mb-8 font-thin">Saved List</h3>
+                        <h3 className="text-2xl mb-5 mt-3 font-thin">Saved List</h3>
                         {data.savedPosts.length === 0 ? 'Você não possui posts salvos' : data.savedPosts.map(user => (
                             <Link key={user.id} href={`/apartament/${user.id}`} className="flex flex-col lg:flex-row gap-3 mb-5">
                                 <Image className="object-cover lg:max-w-60 w-full rounded-lg" src={user.images[0] || "/images/apartament.webp"} width={400} height={400} alt="foto do apartamento" />
@@ -136,71 +148,19 @@ export function ProfilePageContent({data}:ProfilePageContentProps) {
                     <div className="px-4 mt-10">
                         <h2 className="font-thin text-xl mb-6">Messages</h2>
                         <div className="h-full lg:h-[460px] 2xl:h-[900px] scrollDontShow overflow-y-scroll">
-                            <div onClick={() => setOpenChat(true)} className="cursor-pointer flex gap-3 items-center bg-white p-3 w-full rounded-lg mb-5">
-                                <Image className="object-cover w-9 h-9 rounded-full" src="/images/user1.webp" width={200} height={200} alt="foto do usuário" />
-                                <h3 className="font-bold">John Doe</h3>
-                                <p>Can i see it today?</p>
-                            </div>
-                            <div className="flex gap-3 items-center bg-white p-3 w-full rounded-lg mb-5">
-                                <Image className="object-cover w-9 h-9 rounded-full" src="/images/user1.webp" width={200} height={200} alt="foto do usuário" />
-                                <h3 className="font-bold">John Doe</h3>
-                                <p>Can i see it today?</p>
-                            </div>
-                            <div className="flex gap-3 items-center bg-white p-3 w-full rounded-lg mb-5">
-                                <Image className="object-cover w-9 h-9 rounded-full" src="/images/user1.webp" width={200} height={200} alt="foto do usuário" />
-                                <h3 className="font-bold">John Doe</h3>
-                                <p>Can i see it today?</p>
-                            </div>
-                            <div className="flex gap-3 items-center bg-white p-3 w-full rounded-lg mb-5">
-                                <Image className="object-cover w-9 h-9 rounded-full" src="/images/user1.webp" width={200} height={200} alt="foto do usuário" />
-                                <h3 className="font-bold">John Doe</h3>
-                                <p>Can i see it today?</p>
-                            </div>
-                            <div className="flex gap-3 items-center bg-white p-3 w-full rounded-lg mb-5">
-                                <Image className="object-cover w-9 h-9 rounded-full" src="/images/user1.webp" width={200} height={200} alt="foto do usuário" />
-                                <h3 className="font-bold">John Doe</h3>
-                                <p>Can i see it today?</p>
-                            </div>
-                            <div className="flex gap-3 items-center bg-white p-3 w-full rounded-lg mb-5">
-                                <Image className="object-cover w-9 h-9 rounded-full" src="/images/user1.webp" width={200} height={200} alt="foto do usuário" />
-                                <h3 className="font-bold">John Doe</h3>
-                                <p>Can i see it today?</p>
-                            </div>
-                            <div className="flex gap-3 items-center bg-white p-3 w-full rounded-lg mb-5">
-                                <Image className="object-cover w-9 h-9 rounded-full" src="/images/user1.webp" width={200} height={200} alt="foto do usuário" />
-                                <h3 className="font-bold">John Doe</h3>
-                                <p>Can i see it today?</p>
-                            </div>
-                            <div className="flex gap-3 items-center bg-white p-3 w-full rounded-lg mb-5">
-                                <Image className="object-cover w-9 h-9 rounded-full" src="/images/user1.webp" width={200} height={200} alt="foto do usuário" />
-                                <h3 className="font-bold">John Doe</h3>
-                                <p>Can i see it today?</p>
-                            </div>
-                            <div className="flex gap-3 items-center bg-white p-3 w-full rounded-lg mb-5">
-                                <Image className="object-cover w-9 h-9 rounded-full" src="/images/user1.webp" width={200} height={200} alt="foto do usuário" />
-                                <h3 className="font-bold">John Doe</h3>
-                                <p>Can i see it today?</p>
-                            </div>
-                            <div className="flex gap-3 items-center bg-white p-3 w-full rounded-lg mb-5">
-                                <Image className="object-cover w-9 h-9 rounded-full" src="/images/user1.webp" width={200} height={200} alt="foto do usuário" />
-                                <h3 className="font-bold">John Doe</h3>
-                                <p>Can i see it today?</p>
-                            </div>
-                            <div className="flex gap-3 items-center bg-white p-3 w-full rounded-lg mb-5">
-                                <Image className="object-cover w-9 h-9 rounded-full" src="/images/user1.webp" width={200} height={200} alt="foto do usuário" />
-                                <h3 className="font-bold">John Doe</h3>
-                                <p>Can i see it today?</p>
-                            </div>
-                            <div className="flex gap-3 items-center bg-white p-3 w-full rounded-lg mb-5">
-                                <Image className="object-cover w-9 h-9 rounded-full" src="/images/user1.webp" width={200} height={200} alt="foto do usuário" />
-                                <h3 className="font-bold">John Doe</h3>
-                                <p>Can i see it today?</p>
-                            </div>
+                            {chats?.map((chat, index:number) => (
+                                <div key={index} onClick={() => handleOpenChat(chat.id, chat.receiver)} className="cursor-pointer flex gap-3 items-center bg-white p-3 w-full rounded-lg mb-5">
+                                    <Image className="object-cover w-9 h-9 rounded-full" src={chat.receiver.avatar || "/images/user1.webp"} width={200} height={200} alt="foto do usuário" />
+                                    <h3 className="font-bold">{chat.receiver.username}</h3>
+                                    <p>{chat.lastMessage}</p>
+                                </div>
+                            ))}
+                            
                         </div>
                     </div>
                 </div>
             </div>
-            <ChatBox isOpenChatBox={openChat} onSetOpenChat={setOpenChat} />
+            <ChatBox chat={chat} onSetOpenChat={setChat} />
         </>
     )
 }

@@ -15,8 +15,6 @@ export default async function Apartament({params}:any) {
 
     const data = await fetchSinglePost(id);
 
-    console.log(data);
-
     return (
         <>
              <div className="container flex flex-col lg:flex-row justify-center gap-8">
@@ -119,7 +117,7 @@ export default async function Apartament({params}:any) {
                                 <FaRocketchat className="stroke-2 fill-none stroke-black" />
                                 <h6>Send a message</h6>
                             </div>
-                            <SavePost id={id} />
+                            <SavePost id={id} saved={data?.isSaved} />
                         </div>
                     </div>
                 </div>
